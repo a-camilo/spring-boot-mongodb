@@ -1,6 +1,7 @@
 package com.camilo.antonio.services;
 
 import com.camilo.antonio.domain.User;
+import com.camilo.antonio.dto.UserDTO;
 import com.camilo.antonio.repository.UserRepository;
 import com.camilo.antonio.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,13 @@ public class UserService {
         User user = repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Object not found"));
 
         return user;
+    }
+
+    public User insert(User obj) {
+        return repository.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 }
