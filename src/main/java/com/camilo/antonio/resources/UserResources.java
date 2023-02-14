@@ -1,5 +1,6 @@
 package com.camilo.antonio.resources;
 
+import com.camilo.antonio.domain.Post;
 import com.camilo.antonio.domain.User;
 import com.camilo.antonio.dto.UserDTO;
 import com.camilo.antonio.services.UserService;
@@ -53,5 +54,11 @@ public class UserResources {
         obj.setId(id);
         service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/{id}/posts",method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPost(@PathVariable String id){
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 }
